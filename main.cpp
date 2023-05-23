@@ -1,39 +1,33 @@
 #include <iostream>
 #include <cmath>
 using namespace std;
-
 float f(float y){
-    y= ((y*y) *cos(y))+1;
-    return y;
+    float x = pow(y, 2) * cos(y) + 1;
+    return x;
 }
-
 int main() {
-    float a,b,x,err;
-    int t,z;
+    float a , b , x , err;
     do{
-        cout <<"inserire estremi";
-        cin >> a;
-        cin >> b;
-    }while((f(a)*f(b))>=0);
-    a=(a+b)/2;
-    x=a;
+        cout << "inserire estremi" << endl;
+        cin >> a >> b;
+    }while(f(a) * f(b) >= 0);
     do{
-        if (f(x)!= 0){
-            if ((f(a)*f(b))<0){
-                b=x;
+        x=(a + b) / 2;
+        if(f(x) == 0){
+            cout << x << endl;
+            cout << f(x);
+            return 0;
+        }
+        else{
+            if(f(a) * f(x) < 0){
+                b = x;
             }
             else{
-                a=x;
+                a = x;
             }
-            err=((b-a)/2);
-            a=(a+b)/2;
+            err = abs((b - a) / 2);
         }
-    }while((f(x)!=0) or (err >=1e-6));
-    t=x*1000;
-    z=(f(x))*1000;
-    a=t/1000;
-    b=z/1000;
-    cout << a;
-    cout << b;
+    }while(err >= 1e-6);
+    cout << int(x * 10000) / 10000.0 <<endl;
     return 0;
 }
